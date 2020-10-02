@@ -1,4 +1,6 @@
+import { useState, useEffect } from "react"
 import Link from "next/link"
+import { useRouter } from "next/router"
 import styled from "styled-components"
 
 interface NavMenuItemProps {
@@ -7,6 +9,8 @@ interface NavMenuItemProps {
 }
 
 const NavMenuItem: React.FC<NavMenuItemProps> = ({ label, slug }) => {
+  const { pathname } = useRouter()
+
   return (
     <NavLabelContainer>
       <NavLabel>
