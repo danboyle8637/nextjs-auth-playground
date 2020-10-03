@@ -1,4 +1,4 @@
-import { atom } from 'recoil'
+import { atom, selector } from 'recoil'
 
 export const emailAddressFieldState = atom({
   key: 'emailAddressFieldState',
@@ -19,3 +19,18 @@ export const loggedInUser = atom({
   key: "loggedInUser",
   default: "Ladnik"
 })
+
+const currentUserState = atom({
+  key: 'CurrentUserID',
+  default: {
+    email: '',
+    photoUrl: ''
+  },
+});
+
+const currentUserQuery = selector({
+  key: 'CurrentUserName',
+  get: async ({get}) => {
+   
+  },
+});

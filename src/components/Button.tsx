@@ -1,4 +1,3 @@
-import Link from "next/link"
 import styled from "styled-components"
 
 interface ButtonProps {
@@ -11,11 +10,9 @@ const aTagStyles = {
 
 const Button: React.FC<ButtonProps> = ({ children, slug }) => {
   return (
-    <Link href={slug}>
-      <a style={aTagStyles}>
-        <AppButton>{children}</AppButton>
-      </a>
-    </Link>
+    <a href={slug} style={aTagStyles}>
+      <AppButton>{children}</AppButton>
+    </a>
   )
 }
 

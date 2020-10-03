@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import styled from "styled-components"
 
 import ViewImage from "./ViewImage"
@@ -17,6 +18,20 @@ const ViewIdentity: React.FC<ViewIdentityProps> = ({
   titleTag,
   label,
 }) => {
+  useEffect(() => {
+    const getUser = async () => {
+      const user = await fetch("/api/user", {
+        method: "GET",
+      })
+
+      const userData = await user.json()
+
+      console.log(userData)
+    }
+
+    getUser()
+  }, [])
+
   return (
     <ViewContainer>
       <Headline>{headline}</Headline>

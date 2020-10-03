@@ -10,7 +10,7 @@ const NavContainer: React.FC = () => {
   const userId = useRecoilValue(loggedInUser)
 
   const navArray = [
-    { id: 1, label: "Login", slug: "/" },
+    { id: 1, label: "Login", slug: "/api/login" },
     { id: 2, label: "Dashboard", slug: "/dashboard" },
     { id: 3, label: "Program", slug: `/program/${programId}` },
     {
@@ -19,6 +19,7 @@ const NavContainer: React.FC = () => {
       slug: `/workout/${workoutId}?programId=${programId}`,
     },
     { id: 5, label: "Account", slug: `/account/${userId}` },
+    { id: 6, label: "Logout", slug: "/api/logout" },
   ]
 
   const navItems = navArray.map((item) => {

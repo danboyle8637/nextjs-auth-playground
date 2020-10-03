@@ -29,7 +29,7 @@ const LoginForm = () => {
 
   return (
     <FormContainer onSubmit={handleFormSubmit}>
-      <Headline>Sign up or Login:</Headline>
+      <Headline>[Magic] Sign up or Login:</Headline>
       <InputContainer>
         <TextInput
           inputType="text"
