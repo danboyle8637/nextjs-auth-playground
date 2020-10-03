@@ -1,7 +1,11 @@
 import { useEffect } from "react"
+import { useRouter } from "next/router"
+import { useRecoilState } from "recoil"
 import styled from "styled-components"
 
 import ViewImage from "./ViewImage"
+import { currentUserState } from "../atoms/atom"
+import { fetchUser } from "../requests/fetchUser"
 
 interface ViewIdentityProps {
   headline: string
@@ -18,18 +22,18 @@ const ViewIdentity: React.FC<ViewIdentityProps> = ({
   titleTag,
   label,
 }) => {
+  const [user, setUserState] = useRecoilState(currentUserState)
+  const { pathname } = useRouter()
+
   useEffect(() => {
-    const getUser = async () => {
-      const user = await fetch("/api/user", {
-        method: "GET",
-      })
-
-      const userData = await user.json()
-
-      console.log(userData)
+    const accountPathname = pathname.split("/")[1]
+    if (accountPathname === "account") {
+      fetchUser()
+        .then((user) => {
+          setUserState(user)
+        })
+        .catch((error) => console.log(error))
     }
-
-    getUser()
   }, [])
 
   return (

@@ -1,4 +1,5 @@
 import { atom, selector } from 'recoil'
+import { fetchUser } from '../requests/fetchUser'
 
 export const emailAddressFieldState = atom({
   key: 'emailAddressFieldState',
@@ -20,17 +21,19 @@ export const loggedInUser = atom({
   default: "Ladnik"
 })
 
-const currentUserState = atom({
+export const currentUserState = atom({
   key: 'CurrentUserID',
   default: {
     email: '',
+    nickname: '',
     photoUrl: ''
   },
 });
 
-const currentUserQuery = selector({
+export const currentUserQuery = selector({
   key: 'CurrentUserName',
   get: async ({get}) => {
-   
+    const request = await fetchUser()
+    return request
   },
 });
