@@ -21,12 +21,16 @@ export const loggedInUser = atom({
   default: "Ladnik"
 })
 
-export const currentUserState = atom({
-  key: 'CurrentUserID',
+export const userState = atom({
+  key: 'userState',
   default: {
-    email: '',
-    nickname: '',
-    photoUrl: ''
+    data: {
+      email: '',
+      nickname: '',
+      photoUrl: ''
+    },
+    loggedIn: false,
+    loading: false
   },
 });
 

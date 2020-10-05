@@ -1,20 +1,15 @@
-import { useEffect } from "react"
-import { NextPageContext } from "next"
+import styled from "styled-components"
 
 import ViewIndentity from "../src/components/ViewIdentity"
-import Auth0 from "../utils/auth0"
+import useUser from "../src/hooks/useUser"
 
-interface DashboardProps {
-  user: any
-}
-
-const Dashboard: React.FC<DashboardProps> = ({ user }) => {
-  useEffect(() => {
-    console.log(user)
-  }, [])
+const Dashboard: React.FC = () => {
+  const user = useUser()
 
   return (
     <>
+      <Name>{user.data.nickname}</Name>
+      <Name>{user.loading ? "Loading..." : "Not Loading..."}</Name>
       <ViewIndentity
         headline="Dashboard"
         image="/images/auth0-dashboard-image.jpg"
@@ -26,28 +21,9 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
   )
 }
 
-export const getServerSideProps = async (context: NextPageContext) => {
-  const { req, res } = context
-
-  if (req === undefined || res === undefined) {
-    return
-  }
-
-  const session = await Auth0.getSession(req)
-
-  if (!session || !session.user) {
-    res.writeHead(302, {
-      Location: "/api/login",
-    })
-    res.end()
-    return
-  }
-
-  return {
-    props: {
-      user: session.user,
-    },
-  }
-}
-
 export default Dashboard
+
+const Name = styled.h1`
+  margin: 20px 0;
+  color: #f8f8f8;
+`
