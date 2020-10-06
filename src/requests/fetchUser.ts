@@ -1,8 +1,9 @@
 import { useRecoilState } from 'recoil'
 
 import { userState } from '../atoms/atom'
+import Auth0 from '../../utils/auth0'
 
-interface Auth0User {
+export interface Auth0User {
   name: string // This is actually the email
   nickname: string
   picture: string
@@ -22,26 +23,8 @@ export interface User {
 
 
 // fetches the User data
-export const fetchUser = async (): Promise<User> => {
-  const userData = await fetch('/api/user', {
-    method: "GET"
-  })
-
-  const auth0User: Auth0User = await userData.json()
-
-  const data = {
-    email: auth0User.name,
-    nickname: auth0User.nickname,
-    photoUrl: auth0User.picture
-  }
-
-  const user = {
-    data: data,
-    loggedIn: true,
-    loading: false,
-  }
-
-  return user
+export const fetchUser = async () => {
+  
 }
 
 
