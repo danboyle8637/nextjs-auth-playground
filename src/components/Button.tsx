@@ -1,22 +1,11 @@
-import Link from "next/link"
 import styled from "styled-components"
 
 interface ButtonProps {
-  slug: string
+  handleClick: () => void
 }
 
-const aTagStyles = {
-  textDecoration: "none",
-}
-
-const Button: React.FC<ButtonProps> = ({ children, slug }) => {
-  return (
-    <Link href={slug}>
-      <a style={aTagStyles}>
-        <AppButton>{children}</AppButton>
-      </a>
-    </Link>
-  )
+const Button: React.FC<ButtonProps> = ({ children, handleClick }) => {
+  return <AppButton onClick={handleClick}>{children}</AppButton>
 }
 
 export default Button

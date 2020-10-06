@@ -1,10 +1,13 @@
 import styled from "styled-components"
+import { useAuth0 } from "@auth0/auth0-react"
 import { useRecoilValue } from "recoil"
 
 import NavMenuItem from "./NavMenuItem"
+import Button from "./Button"
 import { currentProgram, activeWorkout, loggedInUser } from "../atoms/atom"
 
 const NavContainer: React.FC = () => {
+  const { logout } = useAuth0()
   const programId = useRecoilValue(currentProgram)
   const workoutId = useRecoilValue(activeWorkout)
   const userId = useRecoilValue(loggedInUser)
@@ -29,7 +32,16 @@ const NavContainer: React.FC = () => {
     return <NavMenuItem key={id} label={label} slug={slug} />
   })
 
-  return <NavDrawer>{navItems}</NavDrawer>
+  const handleLogout = () => {
+    logout()
+  }
+
+  return (
+    <NavDrawer>
+      {navItems}
+      <Button handleClick={handleLogout}>Logout</Button>
+    </NavDrawer>
+  )
 }
 
 export default NavContainer
